@@ -6,13 +6,13 @@ use rand::prelude::*;
 #[test]
 fn num_test() {
     // Trivial tests without derivatives, which check the F api.
-    let x = F::var(1.0);
+    let x = F::<f64>::var(1.0);
     assert_eq!(x.x, 1.0);
     assert_eq!(x.dx, 1.0);
     assert_eq!(x.x, x.value());
     assert_eq!(x.dx, x.deriv());
 
-    let y = F::cst(2.0);
+    let y = F::<f64>::cst(2.0);
     assert_eq!(y.x, y.value());
     assert_eq!(y.dx, y.deriv());
 }

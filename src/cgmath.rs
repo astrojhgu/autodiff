@@ -1,7 +1,11 @@
-use super::F;
+use num_traits::Float;
 use cgmath::{AbsDiffEq, RelativeEq, UlpsEq};
+use super::F;
 
-impl AbsDiffEq for F {
+
+impl<T> AbsDiffEq for F<T> 
+where T: Float+AbsDiffEq<Epsilon=T>
+{
     type Epsilon = Self;
     fn default_epsilon() -> Self::Epsilon {
         F::cst(f64::default_epsilon())
@@ -10,7 +14,9 @@ impl AbsDiffEq for F {
         self.x.abs_diff_eq(&other.x, epsilon.x)
     }
 }
-impl RelativeEq for F {
+impl<T> RelativeEq for F<T> 
+where T: Float+RelativeEq+AbsDiffEq<Epsilon=T>
+{
     fn default_max_relative() -> Self::Epsilon {
         F::cst(f64::default_max_relative())
     }
@@ -24,7 +30,9 @@ impl RelativeEq for F {
         self.x.relative_eq(&other.x, epsilon.x, max_relative.x)
     }
 }
-impl UlpsEq for F {
+impl<T> UlpsEq for F<T> 
+where T: Float+UlpsEq+AbsDiffEq<Epsilon=T>
+{
     fn default_max_ulps() -> u32 {
         f64::default_max_ulps()
     }

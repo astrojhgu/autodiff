@@ -9,7 +9,7 @@
 //! # use autodiff::*;
 //! # fn main() {
 //!     // Define a function `f(x) = e^{-0.5*x^2}`
-//!     let f = |x: F| (-x * x / F::cst(2.0)).exp();
+//!     let f = |x: F<f64>| (-x * x / F::cst(2.0)).exp();
 //!
 //!     // Differentiate `f` at zero.
 //!     println!("{}", diff(f, 0.0)); // prints `0`
@@ -23,7 +23,7 @@
 //! # use autodiff::*;
 //! # fn main() {
 //!     // Define a function `f(x,y) = x*y^2`
-//!     let f = |x: &[F]| x[0] * x[1] * x[1];
+//!     let f = |x: &[F<f64>]| x[0] * x[1] * x[1];
 //!
 //!     // Differentiate `f` at `(1,2)`.
 //!     let g = grad(f, &vec![1.0, 2.0]);
@@ -38,7 +38,7 @@
 //! # use autodiff::*;
 //! # fn main() {
 //!     // Define a function `f(x,y) = x*y^2`.
-//!     let f = |v: &[F]| v[0] * v[1] * v[1];
+//!     let f = |v: &[F<f64>]| v[0] * v[1] * v[1];
 //!
 //!     // Differentiate `f` at `(1,2)` with respect to `x` (the first unknown) only.
 //!     let v = vec![
