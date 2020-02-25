@@ -1113,6 +1113,14 @@ where
     results
 }
 
+pub fn eval<G,T>(f: G, x0: &[T])->T
+where G: Fn(&[F<T>]) -> F<T>,
+T: Float,
+{
+    let nums: Vec<F<T>> = x0.iter().map(|&x| F::cst(x)).collect();
+    f(&nums).x
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
