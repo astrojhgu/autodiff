@@ -473,7 +473,7 @@ where T: Float
 {
     #[inline]
     fn one() -> F<T> {
-        F { x: T::zero(), dx: T::zero() }
+        F { x: T::one(), dx: T::zero() }
     }
 }
 
